@@ -1,0 +1,29 @@
+version: 2
+
+jobs:
+  mesa-git:
+    docker:
+      - image: openturns/archlinux-mingw
+        environment:
+          MAKEFLAGS: "-j2"
+    steps:
+      - run:
+          name: Build
+          command: aurman -Syu --noconfirm --noedit --pgp_fetch mingw-w64-mesa-git
+
+workflows:
+  version: 2
+  commit:
+    jobs:
+      - mesa-git
+
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 4"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - mesa-git

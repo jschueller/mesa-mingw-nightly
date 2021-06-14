@@ -9,7 +9,7 @@ jobs:
     steps:
       - run:
           name: Build
-          command: aurman -Syu --noconfirm --noedit --pgp_fetch mingw-w64-mesa-git
+          command: aurman -Syu --noconfirm --noedit --pgp_fetch mingw-w64-libsystre mingw-w64-mesa-git
 
 workflows:
   version: 2
